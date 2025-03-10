@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #202124;
+            line-height: 1.5;
+        }
+        
+        /* Header/Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #5f6368;
+            font-size: 22px;
+            font-weight: 400;
+        }
+        
+        .logo span {
+            margin-left: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-btn {
+            text-decoration: none;
+            color: #5f6368;
+            padding: 8px 16px;
+            margin-left: 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #f1f3f4;
+        }
+        
+        .primary-btn {
+            background-color: #1a73e8;
+            color: white;
+        }
+        
+        .primary-btn:hover {
+            background-color: #1765cc;
+            color: white;
+        }
+        
+        /* Main content */
+        .container {
+            max-width: 800px;
+            margin: 32px auto;
+            padding: 24px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3);
+        }
+        
+        h2 {
+            font-size: 22px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #dadce0;
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-weight: 500;
+            color: #202124;
+            margin: 24px 0 16px 0;
+        }
+        
+        /* Profile section */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .user-picture {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin-right: 24px;
+            border: 1px solid #dadce0;
+        }
+        
+        .user-info {
+            flex-grow: 1;
+        }
+        
+        .user-name {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .user-email {
+            color: #5f6368;
+            font-size: 14px;
+        }
+        
+        /* User details table */
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+        
+        .details-table tr {
+            border-bottom: 1px solid #dadce0;
+        }
+        
+        .details-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .details-table th,
+        .details-table td {
+            padding: 16px 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        .details-table th {
+            width: 30%;
+            color: #5f6368;
+            font-weight: 500;
+        }
+        
+        .details-table td {
+            color: #202124;
+        }
+        
+        /* Attributes table */
+        .attributes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .attributes-table th {
+            background-color: #f1f3f4;
+            color: #202124;
+            font-weight: 500;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        .attributes-table td {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 14px;
+            border-top: 1px solid #dadce0;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 16px;
+                padding: 16px;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .user-picture {
+                margin-right: 0;
+                margin-bottom: 16px;
+            }
+            
+            .details-table th {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#5f6368"/>
+        </svg>
+        <span>Account</span>
+    </div>
+    <div class="nav-links">
+        <a href="/api/contacts/view" class="nav-btn">Contacts</a>
+        <a href="/logout" class="nav-btn primary-btn">Sign out</a>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Personal info</h2>
+    
+    <div class="profile-section">
+        <img th:if="${picture}" th:src="${picture}" class="user-picture" alt="Profile Picture"/>
+        <div class="user-info">
+            <div class="user-name" th:text="${name}">Name</div>
+            <div class="user-email" th:text="${email}">Email</div>
+        </div>
+    </div>
+    
+    <table class="details-table">
+        <tr>
+            <th>Name</th>
+            <td th:text="${name}">-</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${email}">-</td>
+        </tr>
+        <tr>
+            <th>Birthday</th>
+            <td th:text="${birthday}">-</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td th:text="${phone}">-</td>
+        </tr>
+    </table>
+    
+    <div th:if="${#authentication != null}" class="attributes-container">
+        <h3>Account details</h3>
+        <table class="attributes-table">
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr th:each="attr : ${#authentication.principal.attributes}">
+                <td th:text="${attr.key}">Key</td>
+                <td th:text="${attr.value}">Value</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
